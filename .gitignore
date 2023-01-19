@@ -1,0 +1,14 @@
+# Cache objects
+packer_cache/
+
+# Crash log
+crash.log
+
+# For built boxes
+*.box
+
+# artifact build logs
+*artifact*
+
+# test json build files
+*build-test.json
