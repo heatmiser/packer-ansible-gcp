@@ -25,6 +25,7 @@ Configuration
 * `red_hat_activation_key`: Red Hat Activation key that contains valid subscriptions for products being installed e.g. Red Hat Enterprise Linux
 * `red_hat_org_id`: Red Hat organization ID for account that owns above activation key
 * `ah_api_token`: Ansible Hub API token, available here: https://console.redhat.com/ansible/automation-hub/token/
+* `satellite_manifest_url`: RH Satellite Manifest downloaded from RH and placed at "https://some.url.dom/that/is/reachable/from/your/gcp/instance/manifest_file.zip"
 
 4) Edit `gcp-creds.json` directly  
 <tab>modify the following variables:
