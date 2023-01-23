@@ -1,0 +1,73 @@
+{
+    "variables": {
+        "gcp_image_name": "satellite-611-{{isotime `2006-01-02-150405`}}",
+        "gcp_image_description": "Satellite 6.11 {{isotime `2006-01-02-150405`}} built by Packer",
+        "ssh_username": "ec2-user",
+        "red_hat_activation_key": "AK-Sat",
+        "red_hat_org_id": "12345678",
+        "ah_api_token": "00998877665544332211",
+        "satellite_manifest_url": "http://some.location.dom/manifest.zip"
+    },
+    "builders": [{
+        "type": "googlecompute",
+        "project_id": "my project",
+        "source_image_family": "rhel-8",
+        "zone": "us-central1-a",
+        "account_file": "gcp-creds-file.json",
+        "disk_size": "250",
+        "disk_type": "pd-ssd",
+        "skip_create_image": "true",
+        "image_name": "{{user `gcp_image_name`}}",
+        "image_description": "{{user `gcp_image_description`}}",
+        "image_storage_locations": ["us-central1"],
+        "instance_name": "packer-satellite-{{uuid}}",
+        "machine_type": "e2-standard-8",
+        "ssh_username": "{{user `ssh_username`}}",
+        "communicator": "ssh"
+    }],
+    "provisioners": [{
+            "type": "shell",
+            "inline": "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
+        },
+        {
+            "type": "file",
+            "source": "provisioners/scripts/venv_wrapper.sh",
+            "destination": "/tmp/venv_wrapper.sh"
+        },
+        {
+            "type": "file",
+            "source": "provisioners/ansible/collections/requirements.yml",
+            "destination": "/tmp/requirements.yml"
+        },
+        {
+            "type": "file",
+            "source": "provisioners/ansible/ansible.cfg",
+            "destination": "/home/{{user `ssh_username`}}/.ansible.cfg"
+        },
+        {
+            "type": "file",
+            "source": "provisioners/ansible/vars/sat_repos.yml",
+            "destination": "/tmp/sat_repos.yml"
+        },
+        {
+            "type": "shell",
+            "environment_vars": [
+                "LANG=en_US.UTF-8",
+                "LC_ALL=en_US.UTF-8",
+                "api_token={{user `ah_api_token`}}",
+                "satellite_manifest={{user `satellite_manifest_url`}}"
+              ],
+            "script": "./provisioners/scripts/bootstrap.sh"
+        },
+        {
+            "type": "ansible-local",
+            "command": "/tmp/venv_wrapper.sh",
+            "playbook_file": "./provisioners/ansible/setup-server.yml",
+            "extra_arguments": [
+                "--extra-vars",
+                "\"org_id={{user `red_hat_org_id`}} satellite_activation_key={{user `red_hat_activation_key`}}\""
+              
+              ]
+        }
+      ]
+}
