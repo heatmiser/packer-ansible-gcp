@@ -31,10 +31,7 @@ Configuration
 <tab>modify the following variables:
 * `project_id`: "gcp-project-id",
 * `private_key_id`: "d5fc711d42d1f8c288557633ffcb66c49fdbac30",
-* `private_key`: "-----BEGIN PRIVATE KEY-----\nfunkychunkymonkey
-kiG9w0BAQEFAASCBKcwggSfunkychunkymonkey6O2Pwaj\nsBFnyZaH/+a3CGSeY3fC
-rT5b4gYiluE0aU\nDqLr0L3+KaI5S8v/zMWc/AfunkychunkymonkeyhuxU9YB7kG
-peFotNMKbfunkychunkymonkey34VW/XpW2EM9Am9QPAKmE=\n-----END PRIVATE KEY-----\n",
+* `private_key`: "-----BEGIN PRIVATE KEY-----\nfunkychunkymonkeykiG9w0BAQEFAASCBKcwggSfunkychunkymonkey6O2Pwaj\nsBFnyZaH/+a3CGSeY3fCrT5b4gYiluE0aU\nDqLr0L3+KaI5S8v/zMWc/AfunkychunkymonkeyhuxU9YB7kGpeFotNMKbfunkychunkymonkey34VW/XpW2EM9Am9QPAKmE=\n-----END PRIVATE KEY-----\n",
 * `client_email`: "service-account-name@gcp-project-id.iam.gserviceaccount.com",
 * `client_id`: "011708813610399799394",
 * `client_x509_cert_url`: "https://www.googleapis.com/robot/v1/metadata/x509/service-account-name%40gcp-project-id.iam.gserviceaccount.com"
