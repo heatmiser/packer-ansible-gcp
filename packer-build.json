@@ -1,7 +1,7 @@
 {
     "variables": {
-        "gcp_image_name": "satellite-611-{{isotime `2006-01-02-150405`}}",
-        "gcp_image_description": "Satellite 6.11 {{isotime `2006-01-02-150405`}} built by Packer",
+        "gcp_image_name": "satellite-612-{{isotime `2006-01-02-150405`}}",
+        "gcp_image_description": "Satellite 6.12 {{isotime `2006-01-02-150405`}} built by Packer",
         "ssh_username": "ec2-user",
         "red_hat_activation_key": "AK-Sat",
         "red_hat_org_id": "12345678",
